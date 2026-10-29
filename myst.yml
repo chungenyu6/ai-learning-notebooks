@@ -27,7 +27,7 @@ project:
         - file: 02-LLM/00-toc-llm.md
         - pattern: '02-LLM/*.ipynb'
           sort: ascending
-        - title: Live Companions
+        - title: Extended Materials
           children:
             - pattern: '02-LLM/live/*.ipynb'
               sort: ascending

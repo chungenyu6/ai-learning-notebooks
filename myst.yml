@@ -27,6 +27,10 @@ project:
         - file: 02-LLM/00-toc-llm.md
         - pattern: '02-LLM/*.ipynb'
           sort: ascending
+        - title: Live Companions
+          children:
+            - pattern: '02-LLM/live/*.ipynb'
+              sort: ascending
 
 site:
   template: book-theme

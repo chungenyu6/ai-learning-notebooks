@@ -13,15 +13,14 @@ Each notebook is short, runs on CPU in Google Colab without downloading model we
 
 | Extended material | Builds on | What it adds |
 |---|---|---|
-| [From RNN to LSTM to Transformer](./00_rnn_lstm_to_transformer.ipynb) | [Attention](../02_attention.ipynb) | RNNs and LSTMs, vanishing gradients, a character-level LSTM, and an RNN vs LSTM vs Transformer recall experiment |
+| [From RNN to LSTM to Transformer](./00_rnn_lstm_to_transformer.ipynb) | [Attention](../02_attention.ipynb) | RNNs, stacked layers (depth vs time), why tanh, LSTM and GRU with comparison tables, vanishing gradients, a character-level LSTM, an RNN vs LSTM vs Transformer recall experiment, and section quizzes |
 | [Tokenization: BPE, Real Tokenizers, CLM vs MLM](./01_tokenization_clm_mlm.ipynb) | [Tokenization](../01_tokenization.ipynb) | BPE from scratch, GPT-2 vs GPT-4 tokenizer quirks, embedding as one-hot × matrix, causal vs masked LM |
-| [Self-, Multi-Head and Cross-Attention](./02_self_and_cross_attention.ipynb) | [Attention](../02_attention.ipynb) | why divide by $\sqrt{d_k}$ (measured), a causal-mask leakage test, efficient implementations, cross-attention, $O(T^2)$ cost |
+| [Self-, Multi-Head and Cross-Attention](./02_self_and_cross_attention.ipynb) | [Attention](../02_attention.ipynb) | a worked attention example, why divide by $\sqrt{d_k}$ (measured), a causal-mask leakage test, efficient implementations, cross-attention, the Transformer block components, $O(T^2)$ cost |
 | [KV Cache and GQA](./03_gqa_kv_cache.ipynb) | [Attention](../02_attention.ipynb), [Architecture - GPT](../03_architecture_gpt.ipynb) | how a KV cache works, MHA vs GQA vs MQA with equivalence tests, a GPU-memory calculator |
 | [Positional Encoding: Sinusoidal to RoPE](./04_positional_encoding_rope.ipynb) | [Architecture - GPT](../03_architecture_gpt.ipynb) | why attention needs positions, learned and sinusoidal embeddings, RoPE with tests, Llama 3.1 frequency scaling |
 | [GPT vs Llama vs MoE](./05_gpt_vs_llama_vs_moe.ipynb) | [Architecture - GPT](../03_architecture_gpt.ipynb) | GPT-2 → Llama 2 → Llama 3 one component at a time, counting parameters from a config, Mixture of Experts |
-| [LoRA and PEFT](./06_lora_peft.ipynb) | [Finetuning for Classification](../05_finetuning_classification.ipynb), [Finetuning To Follow Instructions](../06_finetuning_instructions.ipynb) | LoRA layers and rank experiments, merging adapters, full FT vs LoRA vs QLoRA memory, loss masking in instruction SFT |
-
-[Pretraining](../04_pretraining.ipynb) has no extended material yet.
+| [Pretraining at Scale: Data, Training Loop, Compute](./06_pretraining_pipeline.ipynb) | [Pretraining](../04_pretraining.ipynb) | a toy data pipeline (filters, MinHash dedup, decontamination, packing, mixture), warmup + cosine decay + gradient clipping, $6ND$ FLOPs and Chinchilla IsoFLOP curves, training-speed and parallelism tables |
+| [LoRA and PEFT](./07_lora_peft.ipynb) | [Finetuning for Classification](../05_finetuning_classification.ipynb), [Finetuning To Follow Instructions](../06_finetuning_instructions.ipynb) | LoRA layers and rank experiments, merging adapters, full FT vs LoRA vs QLoRA memory, loss masking in instruction SFT |
 
 ## Suggested order
 

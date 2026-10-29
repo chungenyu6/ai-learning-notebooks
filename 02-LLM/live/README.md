@@ -6,15 +6,14 @@ They complement — not replace — the main notebooks in `../` (Raschka, *Build
 
 | Notebook | Backbone (Raschka) | Added |
 |---|---|---|
-| `00_rnn_lstm_to_transformer` | *ML with PyTorch & Scikit-Learn* Ch15 (RNN, LSTM, char-level LM); *LLMs-from-scratch* Ch3 §3.1–3.2 | gradient-decay plot, LSTM cell check, causal attention, RNN/LSTM/Transformer recall experiment |
+| `00_rnn_lstm_to_transformer` | *ML with PyTorch & Scikit-Learn* Ch15 (RNN, LSTM, char-level LM); *LLMs-from-scratch* Ch3 §3.1–3.2 | stacked RNNs, tanh vs sigmoid vs ReLU plot, gradient-decay plot, LSTM and GRU cell checks, RNN/LSTM/GRU/Transformer tables, recall experiment, section quizzes |
 | `01_tokenization_clm_mlm` | BPE-from-scratch and embedding-vs-matmul bonuses; Ch2 figures | GPT-2 vs cl100k quirks, simple-BPE CJK limitation, CLM vs MLM |
-| `02_self_and_cross_attention` | Ch3 §3.4–3.6; efficient-MHA and buffers bonuses | √d_k measurement, causal leakage test, MHA vs `nn.MultiheadAttention`, cross-attention, O(T²) |
+| `02_self_and_cross_attention` | Ch3 §3.4–3.6; efficient-MHA and buffers bonuses | worked example, √d_k measurement, causal leakage test, block-component table, MHA vs `nn.MultiheadAttention`, cross-attention, O(T²) |
 | `03_gqa_kv_cache` | KV-cache and GQA bonuses (scripts in `03-gqa_kv_cache/data/`) | cached == uncached tests for MHA/GQA/MQA, GiB calculator, 8B capacity question |
 | `04_positional_encoding_rope` | GPT→Llama 2 §1.4–1.5, Llama 2→3 §1.2 | relative-position test, layout equivalence, KV-cache offset bug, Llama 3.1 frequency scaling plot |
 | `05_gpt_vs_llama_vs_moe` | GPT→Llama 2 §1.1–2, Llama 2→3, MoE bonus | comparison diagram, meta-device 7B count, parameter formulas, load-balancing demo |
-| `06_lora_peft` | Appendix E (LoRA) | rank experiment, merging, full FT / LoRA / QLoRA memory, SFT loss masking |
-
-Pretraining has no extended notebook yet.
+| `06_pretraining_pipeline` | Appendix D (warmup, cosine decay, clipping); Gutenberg and training-speed bonuses | toy data pipeline (filters, MinHash dedup, decontamination, packing), 6ND FLOPs, Chinchilla IsoFLOP curves, parallelism table |
+| `07_lora_peft` | Appendix E (LoRA) | rank experiment, merging, full FT / LoRA / QLoRA memory, SFT loss masking |
 
 ## Sources and licenses
 

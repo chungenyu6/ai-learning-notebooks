@@ -24,4 +24,5 @@ Shorter notebooks that go beyond the main series. See [Extended Materials](./liv
 - [KV Cache and Grouped-Query Attention (GQA)](./live/03_gqa_kv_cache.ipynb)
 - [Positional Encoding: from Sinusoidal to RoPE](./live/04_positional_encoding_rope.ipynb)
 - [GPT vs Llama vs MoE](./live/05_gpt_vs_llama_vs_moe.ipynb)
-- [LoRA and Parameter-Efficient Fine-Tuning](./live/06_lora_peft.ipynb)
+- [Pretraining at Scale: Data, Training Loop, Compute](./live/06_pretraining_pipeline.ipynb)
+- [LoRA and Parameter-Efficient Fine-Tuning](./live/07_lora_peft.ipynb)

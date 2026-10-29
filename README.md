@@ -7,6 +7,12 @@
 
 ## Local preview
 
+先安裝 site plugin 需要的套件（`plugins/details-math.mjs` 用 KaTeX 渲染 `<details>` 裡的公式）：
+
+```bash
+npm ci
+```
+
 ```bash
 npx myst start
 ```

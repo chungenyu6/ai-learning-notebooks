@@ -12,6 +12,8 @@ project:
   authors:
     - name: Chung-En (Johnny) Yu
   github: https://github.com/chungenyu6/ai-learning-notebooks
+  plugins:
+    - plugins/details-math.mjs
   exclude: 
     - README.md
     - my-note/**
@@ -27,7 +29,7 @@ project:
         - file: 02-LLM/00-toc-llm.md
         - pattern: '02-LLM/*.ipynb'
           sort: ascending
-        - title: Extended Materials
+        - file: 02-LLM/live/00-extended-materials.md
           children:
             - pattern: '02-LLM/live/*.ipynb'
               sort: ascending

@@ -16,12 +16,12 @@ The code is mainly tested in Google Colab.
 
 ## Extended Materials
 
-Shorter notebooks that go beyond the main series: tests, measurements, and interview-style check questions on topics the main notebooks only touch on. Every notebook runs on CPU in Google Colab without downloading model weights.
+Shorter notebooks that go beyond the main series. See [Extended Materials](./live/00-extended-materials.md) for why they exist and which main notebook each one builds on.
 
 - [From RNN to LSTM to Transformer](./live/00_rnn_lstm_to_transformer.ipynb)
 - [Tokenization: BPE From Scratch, Real Tokenizers, and CLM vs MLM](./live/01_tokenization_clm_mlm.ipynb)
 - [Self-Attention, Multi-Head Attention, and Cross-Attention](./live/02_self_and_cross_attention.ipynb)
 - [KV Cache and Grouped-Query Attention (GQA)](./live/03_gqa_kv_cache.ipynb)
 - [Positional Encoding: from Sinusoidal to RoPE](./live/04_positional_encoding_rope.ipynb)
-- [LoRA and Parameter-Efficient Fine-Tuning](./live/05_lora_peft.ipynb)
-- [GPT vs Llama vs MoE](./live/06_gpt_vs_llama_vs_moe.ipynb)
+- [GPT vs Llama vs MoE](./live/05_gpt_vs_llama_vs_moe.ipynb)
+- [LoRA and Parameter-Efficient Fine-Tuning](./live/06_lora_peft.ipynb)

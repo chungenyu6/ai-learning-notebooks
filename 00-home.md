@@ -18,7 +18,7 @@ The code is primarily tested in Google Colab. Each lesson combines concepts, imp
 5. [Fine-tuning for Classification](./02-LLM/05_finetuning_classification.ipynb)
 6. [Instruction Fine-tuning](./02-LLM/06_finetuning_instructions.ipynb)
 
-Then go deeper with the [Extended Materials](./02-LLM/00-toc-llm.md#extended-materials): RNN/LSTM, tokenizers, cross-attention, KV cache and GQA, RoPE, LoRA, and GPT vs Llama vs MoE.
+Then go deeper with the [Extended Materials](./02-LLM/live/00-extended-materials.md): RNN/LSTM, tokenizers, cross-attention, KV cache and GQA, RoPE, LoRA, and GPT vs Llama vs MoE.
 
 ## Machine learning project
 

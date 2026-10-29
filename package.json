@@ -1,0 +1,8 @@
+{
+  "name": "ai-learning-notebooks",
+  "private": true,
+  "description": "Build dependencies for the MyST site plugins",
+  "devDependencies": {
+    "katex": "0.16.22"
+  }
+}

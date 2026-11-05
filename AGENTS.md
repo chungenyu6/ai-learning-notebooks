@@ -22,6 +22,23 @@ The reader learns best from **pictures, tables, worked examples and plain-langua
 5. **Tests instead of eyeballing.** `assert` that an implementation matches a reference or a property holds (no future leakage, cached == uncached, and so on).
 6. **Quick checks and interview questions** in collapsible `<details>` blocks. Inline `$...$` math works inside them on the site (rendered by `plugins/details-math.mjs`). Put one 30-second, no-math explanation question in "Check yourself".
 
+## Interactive elements (only where they teach)
+
+Add a slider or buttons only when moving a knob shows something a static figure cannot: a distribution sharpening, a curve shifting, a vector rotating, a trade-off moving. Two or three per notebook at most; most figures stay static.
+
+| Need | Use | On the site | In Colab |
+|---|---|---|---|
+| explore a few precomputed settings | **Plotly figure with a slider or buttons** | interactive (plain JavaScript, no kernel) | interactive |
+| type any number into a calculator | **Colab form field**: `x = 8  #@param {type:"number"}` or `{type:"slider", min:1, max:32}` | plain code with its saved output | form with a field or slider |
+| anything that needs Python to rerun on each change | avoid `ipywidgets` / `interact` | shows "a Jupyter kernel connection is required" | works |
+
+- Plotly: in the setup cell, `import plotly.io as pio` and, outside Colab, `pio.renderers.default = "plotly_mimetype+notebook_connected"` so the saved output renders on the site. Keep figures small (about 30 slider steps or fewer, a handful of traces).
+- The default slider position must tell the story on its own, for readers who never touch it.
+
+## Link to existing interactive tools
+
+If a well-regarded interactive site already shows the concept, link it where the concept is introduced, with one line on what to try, instead of rebuilding it. Examples: [Tiktokenizer](https://tiktokenizer.vercel.app/) (tokenization), [Transformer Explainer](https://poloclub.github.io/transformer-explainer/) (a GPT-2 forward pass), [LLM Visualization](https://bbycroft.net/llm) (3D walk through a GPT), [TensorFlow Playground](https://playground.tensorflow.org/) (small neural networks), [Distill: Why Momentum Really Works](https://distill.pub/2017/momentum/) (optimizers). When building a notebook, search for such tools; prefer ones from research groups, publications or widely used projects, check the link works, and do not quote their numbers as facts.
+
 ## Notebook structure (Extended Materials)
 
 - File name `02-LLM/live/NN_topic.ipynb`; assets in `02-LLM/live/NN-topic/img/` and `NN-topic/data/`. Load them by raw GitHub URL (`https://github.com/chungenyu6/ai-learning-notebooks/blob/main/...?raw=true`) so the notebook also works in Colab.

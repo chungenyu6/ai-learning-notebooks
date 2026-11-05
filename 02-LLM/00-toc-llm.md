@@ -30,3 +30,4 @@ Shorter notebooks that go beyond the main series. See [Extended Materials](./liv
 Post-training series (read in order):
 
 - [Preference Tuning: Reward Models, RLHF and DPO](./live/08_preference_tuning_rlhf_dpo.ipynb)
+- [Reasoning at Inference Time: Sampling, Verifiers and Evaluation](./live/09_inference_time_scaling_and_evaluation.ipynb)

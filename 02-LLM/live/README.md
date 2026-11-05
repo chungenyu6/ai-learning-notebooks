@@ -15,6 +15,7 @@ They complement — not replace — the main notebooks in `../` (Raschka, *Build
 | `06_pretraining_pipeline` | Appendix D (warmup, cosine decay, clipping); Gutenberg and training-speed bonuses | toy data pipeline (filters, MinHash dedup, decontamination, packing), 6ND FLOPs, Chinchilla IsoFLOP curves, parallelism table |
 | `07_lora_peft` | Appendix E (LoRA) | rank experiment, merging, full FT / LoRA / QLoRA memory, SFT loss masking |
 | `08_preference_tuning_rlhf_dpo` | `ch07/04_preference-tuning-with-dpo` (DPO loss, log-probs; training log and sample outputs of his saved GPT-2 medium run in `08-preference_tuning_rlhf_dpo/data/`) | toy kitchen with a known true preference, Bradley–Terry reward model, exact RLHF optimum with a β slider, PPO clipping plot, DPO tests, collapse when trained too long, reward-hacking curve with a bias slider |
+| `09_inference_time_scaling_and_evaluation` | *Build a Reasoning Model (From Scratch)* Ch3 (verifier), Ch4 (temperature, top-p, self-consistency, MATH-500 results table), Appendix F (multiple choice, Elo, judge rubric); Qwen3-0.6B base checkpoint downloaded at run time into `qwen3/` (git-ignored), `reasoning_from_scratch` installed with `--no-deps` | temperature slider on real logits, top-p tests, verifier blind spots, token-budget truncation, best-of-N vs self-consistency simulation, accuracy-vs-compute plot, log-prob multiple choice, Elo vs Bradley–Terry, judge-bias table |
 
 ## Sources and licenses
 

@@ -3,3 +3,4 @@ _build
 my-note/
 .DS_Store
 node_modules/
+02-LLM/live/qwen3/

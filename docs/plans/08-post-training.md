@@ -1,6 +1,6 @@
 # Plan: Post-training Extended Materials (RLHF, DPO, GRPO)
 
-Status: **v3, agreed with the maintainer (2026-11-05)**. Built: `08_preference_tuning_rlhf_dpo` and `09_inference_time_scaling_and_evaluation`; `10` is next. Follows [`AGENTS.md`](../../AGENTS.md).
+Status: **v3, agreed with the maintainer (2026-11-05)**. Built: all three (`08_preference_tuning_rlhf_dpo`, `09_inference_time_scaling_and_evaluation`, `10_rlvr_grpo`). Site structure changed after v3: the series has its own overview page and sidebar group, and notebooks are referred to by title, not number. Follows [`AGENTS.md`](../../AGENTS.md).
 
 ## Decisions
 

@@ -33,3 +33,4 @@ A series on what happens after instruction fine-tuning, read in order. See [Post
 
 1. [Preference Tuning: Reward Models, RLHF and DPO](./live/08_preference_tuning_rlhf_dpo.ipynb)
 2. [Reasoning at Inference Time: Sampling, Verifiers and Evaluation](./live/09_inference_time_scaling_and_evaluation.ipynb)
+3. [Reinforcement Learning with Verifiable Rewards: GRPO](./live/10_rlvr_grpo.ipynb)

@@ -1,6 +1,6 @@
 # Plan: Post-training Extended Materials (RLHF, DPO, GRPO)
 
-Status: **draft, waiting for review**. Nothing is built yet. Follows the rules in [`AGENTS.md`](../../AGENTS.md).
+Status: **draft v2, under discussion**. Nothing is built yet. Follows [`AGENTS.md`](../../AGENTS.md), except for the proposed change to the weights rule below.
 
 ## Why
 
@@ -8,103 +8,155 @@ The extended materials cover architecture, pretraining and fine-tuning, but noth
 
 - "Walk me through the post-training stack: SFT → RLHF → DPO → RLVR/GRPO" is a standard breadth question.
 - Training-oriented roles ask to write the **DPO loss** and explain the **GRPO objective** (group-relative advantage) from memory.
-- The maintainer's research angle is that **RLVR works when rewards are verifiable and fails when they are not**, which connects to reliability and uncertainty work. The notebooks should make that argument concrete with runnable evidence (reward hacking, verifier noise).
-- The same material is reusable as demos for a TA lecture on RLHF/RLVR.
+- The maintainer's research angle is that **RLVR works when rewards are verifiable and fails when they are not**, which connects to reliability and uncertainty work. The notebooks should make that argument concrete with runnable evidence.
+- The same material doubles as demos for a TA lecture on RLHF/RLVR.
 
-## Recommendation: two notebooks, not one
+## 1. Compute: what runs where
 
-One notebook covering SFT, reward models, PPO, DPO, GRPO and reward hacking would be about twice as long as the others. Split at the natural boundary, human preferences versus verifiable rewards:
+### Hardware we have
 
-| File | Title | Builds on |
+| Machine | Memory | Use it for |
 |---|---|---|
-| `08_preference_tuning_rlhf_dpo.ipynb` | Preference Tuning: Reward Models, RLHF and DPO | `06_finetuning_instructions.ipynb`, `07_lora_peft` |
-| `09_rlvr_grpo.ipynb` | Reinforcement Learning with Verifiable Rewards: GRPO | `08_preference_tuning_rlhf_dpo` |
+| Maintainer's laptop: Apple M3, **8 GB** unified memory, ~27 GB free disk | 8 GB shared by macOS, browser and the model | toy models on CPU; loading a 0.6B model for a few generations at most. **No training of real models.** |
+| Google Colab free, CPU runtime | ~12 GB RAM, 2 slow cores | the default "Run all" path |
+| Google Colab free, T4 GPU | 15 GB GPU memory; GPU not guaranteed, sessions are time-limited | optional GPU sections |
 
-Decoding strategies and inference-time scaling (best-of-N, self-consistency) fit naturally at the start of 09, because best-of-N with a verifier is the simplest form of "use a reward at inference time".
+### What the upstream code needs (from Raschka's own notes)
 
-## Running analogy: an apprentice chef
+| Task | Model | Reported cost | Fits where? |
+|---|---|---|---|
+| DPO (`dpo-from-scratch.ipynb`) | GPT-2 medium, 355M | ~2 min on A100, ~4 min on L4, ~30 min on an M3 MacBook Air | Colab T4: yes (expect several minutes). Laptop: risky with 8 GB (policy + reference model + AdamW states is roughly 7 GB before activations). |
+| GRPO (`reasoning-from-scratch` Ch. 6 scripts) | Qwen3-0.6B | 4 rollouts × 256 tokens: 10.6 GB; 4 × 512: 12.8 GB; 8 × 512 (the setting in his results): 20.3 GB | Colab T4: only the small settings, and slowly. Laptop: no. |
+| Loading Qwen3-0.6B for generation | 0.6B, checkpoint ~1.5 GB | inference only | laptop and Colab CPU: yes for a handful of answers; T4: fast |
 
-Used across both notebooks, introduced with a mapping table and a minimal illustration.
+Raschka also publishes **training logs and checkpoints** of his GRPO runs (Hugging Face `rasbt/qwen3-from-scratch-grpo-checkpoints`, 1.5 GB each; CSV logs in Ch. 7 `02_logs`). His results table is itself a teaching artifact: original GRPO with the KL term reaches 33.4% on MATH-500 at step 50 and **collapses to 0.4% at step 100**, while the no-KL and Olmo 3 / DeepSeek-V3.2 variants stay around 44–47%.
 
-| In the kitchen | In post-training |
-|---|---|
-| reading every cookbook in the library | pretraining |
-| copying the head chef's dishes exactly | supervised fine-tuning (SFT) |
-| a food critic who learned the customers' taste from "dish A or dish B?" votes | reward model (Bradley–Terry) |
-| cooking, getting scored by the critic, while a coach stops you from drifting too far from your training | RLHF with PPO and a KL penalty to the reference model |
-| learning straight from the vote cards, without hiring a critic | DPO |
-| cooking eight versions of the same dish and comparing each with the batch average | GRPO's group-relative advantage |
-| a thermometer and a recipe checklist instead of a critic's opinion | verifiable reward (RLVR) |
-| the critic loves garnish, so you pile on parsley | reward hacking / over-optimization |
+### Proposed change to the weights rule
 
-Where it breaks: a reward model scores whole responses but the policy is trained token by token; the "coach" (KL term) is a soft penalty, not a hard rule.
+Current rule: "Runs on CPU in Google Colab in a few minutes, without downloading model weights."
 
-## Constraints
+Proposed rule:
 
-- CPU only in Colab, a few minutes per notebook, **no model-weight downloads** (same rule as the other notebooks). Raschka's DPO notebook fine-tunes GPT-2 medium and `reasoning-from-scratch` uses Qwen3-0.6B, so we keep their **loss functions and training-step code** but run them on tiny models and toy tasks where the effect is visible in seconds.
-- Toy tasks must make the "right answer" obvious so readers can see *what* each method learns.
+> Default path ("Run all") runs on Colab CPU in a few minutes. It may download one small model (up to ~0.6B parameters, ~1.5 GB) for **inference only**, plus published logs. Training a real model goes in an **optional GPU section**, off by default (`RUN_GPU = False  #@param {type:"boolean"}`), with the expected GPU, memory and time written above it. The saved outputs on the site always come from the default path.
 
-## Notebook 08: Preference Tuning (Reward Models, RLHF, DPO)
+Why this split:
+
+- Every concept and test runs on a **tiny model** on CPU, so readers see the mechanism in seconds and the notebook never depends on getting a GPU.
+- The **real-model evidence** (DPO on GPT-2 medium, GRPO on Qwen3-0.6B) comes from Raschka's published logs and checkpoints by default, and readers with a GPU can reproduce a short run.
+- Nothing heavy ever runs on the 8 GB laptop. I execute only the default path locally; if we want saved outputs from a GPU section, the maintainer runs that section in Colab and we commit the notebook with outputs.
+
+## 2. How many notebooks: three
+
+Two notebooks would each be about twice the length of the existing ones. Three keeps each at the usual size (25–40 cells, a few minutes) and splits at boundaries interviews also use:
+
+| File | Title | Builds on | Real model in default path |
+|---|---|---|---|
+| `08_preference_tuning_rlhf_dpo.ipynb` | Preference Tuning: Reward Models, RLHF and DPO | `06_finetuning_instructions.ipynb`, `07_lora_peft` | none (GPT-2 medium DPO is the optional GPU section) |
+| `09_inference_time_scaling_and_evaluation.ipynb` | Reasoning at Inference Time: Sampling, Verifiers and Evaluation | `04_pretraining.ipynb` (decoding), `08` | Qwen3-0.6B, a few generations |
+| `10_rlvr_grpo.ipynb` | Reinforcement Learning with Verifiable Rewards: GRPO | `08`, `09` | Raschka's GRPO logs and one checkpoint |
+
+Why 09 sits between them: GRPO samples a group of answers and scores them with a verifier. Notebook 09 teaches exactly those two pieces without any training (sampling, best-of-N, self-consistency, verifiers, LLM-as-judge), so 10 only has to add the update rule. It is also the natural home for evaluation, the maintainer's strongest interview topic.
+
+More than three would cut topics that need each other (for example, separating PPO from DPO loses the derivation that links them).
+
+## 3. Running analogy: one kitchen for the whole series
+
+**Recommendation: share one analogy across 08–10**, because the stages form one pipeline and one story helps recall the order (pretrain → SFT → reward → RL). Each notebook opens with the same mapping table, highlighting its own rows, so each one still stands alone. The attention notebooks keep their own analogy (the meeting room); a new analogy per *topic series*, not per notebook.
+
+| In the kitchen | In post-training | Notebook |
+|---|---|---|
+| reading every cookbook in the library | pretraining | (04, 06) |
+| copying the head chef's dishes exactly | supervised fine-tuning (SFT) | (06) |
+| a food critic who learned the customers' taste from "dish A or dish B?" votes | reward model (Bradley–Terry) | 08 |
+| cooking, being scored by the critic, while a coach stops you drifting too far from your training | RLHF with PPO and a KL penalty | 08 |
+| learning straight from the vote cards, without hiring a critic | DPO | 08 |
+| the critic loves garnish, so you pile on parsley | reward hacking / over-optimization | 08 |
+| cooking several versions and serving the one that passes the taste test | best-of-N with a verifier | 09 |
+| asking several cooks and serving the most common answer | self-consistency (majority vote) | 09 |
+| a thermometer and a recipe checklist instead of a critic's opinion | verifiable reward | 09, 10 |
+| cooking eight versions of the same dish and comparing each with the batch average | GRPO's group-relative advantage | 10 |
+| a broken thermometer you learn to fool | an exploitable verifier | 10 |
+
+Where it breaks: a reward scores a whole response but training updates token by token; the coach (KL term) is a soft penalty, not a rule; and a real verifier checks only the final answer, not the reasoning.
+
+## 4. Notebook outlines
+
+Figures are self-made in matplotlib unless noted. ⚙️ marks the optional GPU section. 🎚️ marks the (at most two or three) interactive Plotly figures.
+
+### 08 Preference Tuning: Reward Models, RLHF and DPO
 
 | Part | Content | Figures / tables |
 |---|---|---|
-| 1 | The post-training stack and where each stage sits; what SFT cannot teach (preferences between two acceptable answers) | pipeline diagram drawn in matplotlib; table "stage → data → objective → typical size" |
-| 2 | Preference data: prompt, chosen, rejected; how it is collected | table of a few toy pairs |
-| 3 | Reward model with the Bradley–Terry loss $-\log\sigma(r(x,y_w)-r(x,y_l))$; worked example by hand; train a tiny reward model on the toy task | plot of $\sigma(\Delta r)$; reward histogram for chosen vs rejected |
-| 4 | RLHF with PPO, conceptually: the objective $\mathbb{E}[r]-\beta\,\mathrm{KL}(\pi\Vert\pi_{\text{ref}})$, the four models in memory (policy, reference, reward, value), clipping | "four models" memory table; KL-penalty illustration |
-| 5 | DPO: derive the loss from the RLHF objective in a few lines, then Raschka's `compute_dpo_loss` and training step on a tiny GPT | plot of implicit reward margin and log-prob of chosen vs rejected during training |
-| 6 | Tests: DPO loss equals $\log 2$ when policy = reference; gradient pushes chosen up and rejected down; $\beta$ controls how far the policy moves | table of $\beta$ vs final KL |
-| 7 | Reward hacking: optimize a policy against a proxy reward model that also likes length, and watch true quality fall while proxy reward rises (Goodhart) | the over-optimization curve: proxy reward and true reward vs KL from reference |
+| 1 | The post-training stack; what SFT cannot teach (choosing between two acceptable answers) | pipeline diagram; table "stage → data → objective → models in memory" |
+| 2 | Preference data: prompt, chosen, rejected; a toy task with a hidden "true preference" rule (for example, polite and short), so true quality is measurable | table of toy pairs |
+| 3 | Reward model with the Bradley–Terry loss $-\log\sigma(r_w-r_l)$: worked example by hand, then train a tiny reward model | $\sigma(\Delta r)$ curve; reward histograms for chosen vs rejected |
+| 4 | RLHF with PPO, conceptually: $\mathbb{E}[r]-\beta\,\mathrm{KL}(\pi\Vert\pi_{\text{ref}})$, the four models (policy, reference, reward, value), the clipped objective in a few lines | 🎚️ slider over $\beta$: how far the optimal policy moves from the reference |
+| 5 | DPO: derive the loss from the RLHF objective; Raschka's `compute_dpo_loss` on a tiny GPT | chosen vs rejected log-prob and implicit-reward margin during training |
+| 6 | Tests: DPO loss $=\log 2$ when policy = reference; gradients raise chosen and lower rejected; larger $\beta$ keeps the policy closer | table of $\beta$ vs final KL |
+| 7 | Reward hacking: optimize against a proxy reward model that also likes length; proxy reward rises while true quality falls | over-optimization curve (proxy and true reward vs KL) |
+| ⚙️ | DPO on GPT-2 medium with Raschka's data, as in his notebook (Colab T4, several minutes) | his reward-margin plot reproduced |
 | 8 | Check yourself + References | — |
 
-Toy task idea: responses are short token sequences; the hidden "true preference" is a simple rule (for example, contains a polite token and is short). Chosen/rejected pairs are generated from the rule, so we can measure true quality exactly.
-
-## Notebook 09: RLVR and GRPO
+### 09 Reasoning at Inference Time: Sampling, Verifiers and Evaluation
 
 | Part | Content | Figures / tables |
 |---|---|---|
-| 1 | Verifiable rewards: math answers, unit tests, format checks; why they made RL cheap again (no reward model) | table "task → verifier → can it be gamed?" |
-| 2 | Using a verifier at inference time: greedy vs temperature sampling, best-of-N, self-consistency (majority vote) | accuracy vs N curve |
-| 3 | GRPO step by step: sample a group of $G$ answers per prompt, reward each, advantage $A_i=(r_i-\bar r)/\sigma_r$, clipped policy-gradient update, optional KL to reference; worked example with $G=4$ by hand | bar chart of rewards → advantages for one group |
-| 4 | Train a tiny policy on a toy arithmetic task with an exact-match verifier, using the GRPO step from `reasoning-from-scratch` Ch. 6 | reward and accuracy curves; response-length curve |
-| 5 | Stabilizing GRPO (Ch. 7): tracking, clip ratio, KL term, format reward; one ablation | table of variants and what each fixes |
-| 6 | When the verifier is imperfect: add label noise or a loophole to the verifier and show the policy exploiting it; connect to non-verifiable tasks (open-ended answers, LLM-as-judge) | true accuracy vs verifier reward as noise grows |
-| 7 | PPO vs DPO vs GRPO summary | comparison table: needs reward model? value model? online sampling? memory |
-| 8 | Check yourself + References | — |
+| 1 | Decoding recap: greedy, temperature, top-k, top-p | 🎚️ slider over temperature on a real next-token distribution |
+| 2 | Load Qwen3-0.6B (inference only) with Raschka's `reasoning_from_scratch` code; base vs reasoning variant on two math problems | side-by-side outputs table |
+| 3 | Verifiers: extracting a final answer, exact-match and symbolic checks (`reasoning-from-scratch` Ch. 3) | table "task → verifier → how it can be gamed" |
+| 4 | Inference-time scaling: best-of-N and self-consistency on a small problem set, with toy numbers precomputed where generation is slow | accuracy vs N curve |
+| 5 | Evaluating without a verifier: multiple-choice (MMLU-style), leaderboards, LLM-as-judge and its biases (Appendix F) | table of judge biases (position, length, self-preference) |
+| 6 | Check yourself + References | — |
 
-## Sources
+### 10 RLVR and GRPO
 
-| Source | Use | License (internal note only) |
+| Part | Content | Figures / tables |
 |---|---|---|
-| Raschka, LLMs-from-scratch [`ch07/04_preference-tuning-with-dpo/dpo-from-scratch.ipynb`](https://github.com/rasbt/LLMs-from-scratch/tree/main/ch07/04_preference-tuning-with-dpo) | DPO loss, log-prob computation, training step (📗 in 08) | Apache-2.0 code |
-| Raschka, [`reasoning-from-scratch`](https://github.com/rasbt/reasoning-from-scratch) Ch. 6 (`ch06_main.ipynb`, `02_rlvr_grpo_scripts_intro`) and Ch. 7 (`03_rlvr_grpo_scripts_advanced`: tracking, clip ratio, KL, format reward) | GRPO implementation and stabilizations (📗 in 09) | Apache-2.0 |
-| Raschka, `reasoning-from-scratch` Ch. 3–4 | evaluation with a verifier, inference-time scaling (09 Part 2) | Apache-2.0 |
-| Nathan Lambert, *The RLHF Book* (rlhfbook.com) and its course slides, Ch. 5–8, 14 | structure and explanations; **cite only, do not copy text or figures** | check before quoting |
-| Papers: InstructGPT (Ouyang et al., 2022, arXiv:2203.02155); PPO (Schulman et al., 2017, arXiv:1707.06347); DPO (Rafailov et al., 2023, arXiv:2305.18290); DeepSeekMath / GRPO (Shao et al., 2024, arXiv:2402.03300); DeepSeek-R1 (2025, arXiv:2501.12948); reward-model over-optimization (Gao et al., 2022, arXiv:2210.10760) | formulas and claims, cited in References | — |
+| 1 | Why verifiable rewards made RL cheap: no reward model, no value model | table "PPO vs DPO vs GRPO: models in memory, online sampling, needs preferences?" |
+| 2 | GRPO step by step: group of $G$ answers, $A_i=(r_i-\bar r)/\sigma_r$, clipped update, optional KL; worked example with $G=4$ by hand | rewards → advantages bar chart |
+| 3 | Train a tiny policy on a toy arithmetic task with an exact-match verifier using Raschka's GRPO step | reward, accuracy and response-length curves |
+| 4 | The real run: plot Raschka's published Qwen3-0.6B logs; why the KL variant collapses at step 100 and what the Ch. 7 fixes change | log curves; his results table |
+| 5 | Stabilizing GRPO (Ch. 7): tracking, clip ratio, KL, format reward; one ablation on the toy task | table of variants and what each fixes |
+| 6 | When the verifier is imperfect: add noise or a loophole and watch the policy exploit it; why open-ended tasks have no reliable verifier | 🎚️ slider over verifier noise: true accuracy vs verifier reward |
+| ⚙️ | A short GRPO run on Qwen3-0.6B with 4 rollouts × 256 tokens (Colab T4, ~11 GB) | — |
+| 7 | Check yourself + References | — |
 
-All figures are self-made in matplotlib; Raschka figures only if they add something the toy plots cannot show.
+## 5. Sources
 
-## Interview questions to cover
+| Source | Use | Notes |
+|---|---|---|
+| Raschka, LLMs-from-scratch [`ch07/04_preference-tuning-with-dpo`](https://github.com/rasbt/LLMs-from-scratch/tree/main/ch07/04_preference-tuning-with-dpo) | DPO loss, log-probs, training step, ⚙️ section of 08 | Apache-2.0 code |
+| Raschka, [`reasoning-from-scratch`](https://github.com/rasbt/reasoning-from-scratch) Ch. 2–4, Appendix F | Qwen3 loading, verifiers, inference-time scaling, evaluation (09) | Apache-2.0 |
+| Raschka, `reasoning-from-scratch` Ch. 6 (`02_rlvr_grpo_scripts_intro`), Ch. 7 (`02_logs`, `03_rlvr_grpo_scripts_advanced`), checkpoints on Hugging Face | GRPO code, published logs and results table (10) | Apache-2.0 |
+| Nathan Lambert, *The RLHF Book* (rlhfbook.com), Ch. 5–8 and 14, and its course slides | structure and explanations; cite only | — |
+| InstructGPT (arXiv:2203.02155); PPO (arXiv:1707.06347); DPO (arXiv:2305.18290); DeepSeekMath/GRPO (arXiv:2402.03300); DeepSeek-R1 (arXiv:2501.12948); reward-model over-optimization (Gao et al., arXiv:2210.10760); self-consistency (Wang et al., arXiv:2203.11171) | formulas and claims, cited in References | — |
+
+Interactive tools to link where they fit (check each link when building): the RLHF Book's interactive pages, Transformer Explainer for the sampling-temperature part.
+
+## 6. Interview questions to cover
 
 - Walk through SFT → RLHF → DPO → GRPO. What problem does each stage solve?
-- Write the Bradley–Terry reward-model loss and the DPO loss. What is the "implicit reward" in DPO?
-- Why does RLHF need a KL penalty? What happens with $\beta\to0$ and $\beta\to\infty$?
-- PPO needs four models in memory; DPO and GRPO need fewer. Which ones, and why?
-- What is the group-relative advantage, and why does GRPO not need a value model?
-- What is reward hacking? Give two concrete examples and two mitigations.
-- When does RLVR work, and why does it break for open-ended tasks? (the maintainer's research hook)
+- Write the Bradley–Terry loss and the DPO loss. What is DPO's implicit reward?
+- Why does RLHF need a KL penalty? What happens as $\beta\to0$ and $\beta\to\infty$?
+- PPO keeps four models in memory; DPO and GRPO fewer. Which, and why?
+- Best-of-N vs self-consistency: what does each need, and when does each fail?
+- How would you evaluate an LLM when there is no ground truth? What can go wrong with LLM-as-judge?
+- What is the group-relative advantage, and why does GRPO need no value model?
+- What is reward hacking? Two examples, two mitigations.
+- When does RLVR work, and why does it break for open-ended tasks?
 - 30-second, no-math explanation of RLHF.
 
-## Checklist when building
+## 7. Build order and checklist
 
-- [ ] Agree on one vs two notebooks and the toy tasks (open questions below).
-- [ ] Copy needed upstream scripts into `NN-topic/data/` with `LICENSE` and note them in `02-LLM/live/README.md`.
-- [ ] Build 08, execute, check figures; then 09.
-- [ ] Update `00-extended-materials.md`, `00-toc-llm.md`, `02-LLM/live/README.md`, the "Builds on" links, and the OLIVER page `references/online-learning-resources-triage.md` (its Extended Materials table).
-- [ ] `npm ci && npx mystmd build --html` without warnings; push; check the live pages.
+1. Agree on this plan, and update the weights rule in `AGENTS.md`.
+2. Build 08 (CPU only), execute, review figures with the maintainer.
+3. Build 09, then 10.
+4. For each: copy upstream scripts into `NN-topic/data/` with the license file; update `00-extended-materials.md`, `00-toc-llm.md`, `02-LLM/live/README.md`, and the OLIVER page `references/online-learning-resources-triage.md`.
+5. `npm ci && npx mystmd build --html` without warnings; push; check the live pages.
 
-## Open questions for the maintainer
+## 8. Open questions
 
-1. Two notebooks (recommended) or one longer notebook?
-2. Toy tasks: is a synthetic preference rule (08) and single-digit arithmetic (09) concrete enough, or would you rather see a tiny real-text example even if it takes longer to run?
-3. Include a short PPO implementation, or keep PPO conceptual (recommended: conceptual plus the clipped objective in a few lines, since GRPO reuses the clipping)?
+1. Is the proposed weights rule acceptable (small model for inference by default; real training only in an optional GPU section)?
+2. Three notebooks as above, or fold 09 into the other two?
+3. One kitchen analogy across 08–10 (recommended), or a separate analogy per notebook?
+4. Should the ⚙️ GPU sections ship with saved outputs (you run them in Colab once), or stay as code only?

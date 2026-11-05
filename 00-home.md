@@ -20,6 +20,8 @@ The code is primarily tested in Google Colab. Each lesson combines concepts, imp
 
 Then go deeper with the [Extended Materials](./02-LLM/live/00-extended-materials.md): RNN/LSTM, tokenizers, cross-attention, KV cache and GQA, RoPE, LoRA, and GPT vs Llama vs MoE.
 
+After fine-tuning, continue with the [Post-training](./02-LLM/live/00-post-training.md) series: reward models, RLHF and DPO; sampling, verifiers and evaluation; reinforcement learning with verifiable rewards.
+
 ## Machine learning project
 
 - [Deep Dive into MLPs](./01-ML/DL_MLP_All_Techniques.ipynb): from-scratch NumPy, Keras experiments, optimization, regularization, diagnostics, and visualization.

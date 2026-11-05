@@ -36,10 +36,10 @@ project:
           children:
             - pattern: '02-LLM/live/0[0-7]_*.ipynb'
               sort: ascending
-            - title: Post-training series
-              children:
-                - pattern: '02-LLM/live/{08,09,10}_*.ipynb'
-                  sort: ascending
+        - file: 02-LLM/live/00-post-training.md
+          children:
+            - pattern: '02-LLM/live/{08,09,10}_*.ipynb'
+              sort: ascending
 
 site:
   template: book-theme

@@ -42,17 +42,18 @@ If a well-regarded interactive site already shows the concept, link it where the
 ## Notebook structure (Extended Materials)
 
 - File name `02-LLM/live/NN_topic.ipynb`; assets in `02-LLM/live/NN-topic/img/` and `NN-topic/data/`. Load them by raw GitHub URL (`https://github.com/chungenyu6/ai-learning-notebooks/blob/main/...?raw=true`) so the notebook also works in Colab.
-- First cell: title; creator; content-updated date; the Colab link block used by the main notebooks; one sentence starting "Extends `xx.ipynb`..."; the sources table; runtime note; a "Part | Content" table.
+- First cell: title; creator; content-updated date; the Colab link block used by the main notebooks; one sentence starting "Extends [Title](link)..."; the sources table; runtime note; a "Part | Content" table.
 - Sources: tag sections and code taken from Raschka with 📗 (📘 for *Machine Learning with PyTorch and Scikit-Learn*) and a short source label; untagged text and code are written for the notebook. Code cells copied from a source start with `# Source: ...`.
 - Sections numbered `## 1.`, `## 2.`, ...; last section "Check yourself (interview-style)", then "References".
 - Runs on CPU in Google Colab (and on an 8 GB laptop) in a few minutes. The point is learning, not training: **never train a real model**. Toy models that train in seconds are fine. To show real-model behaviour, use published checkpoints (at most ~0.6B parameters, for a few short generations), training logs and saved outputs, preferably Raschka's. When a notebook does this instead of a full fine-tuning run, say so in a short "How this notebook works" note right after the sources table.
-- A notebook that belongs to a series (several notebooks on one topic, sharing one running analogy) starts with a one-line series banner naming the parts in order, with links to the previous and next notebook.
+- A notebook that belongs to a series (several notebooks on one topic, sharing one running analogy) starts with a one-line series banner naming the parts in order by title, with links to the other parts and to the series overview page. A series gets its own overview page and its own group in the site navigation, outside Extended Materials.
 
 ## Do not put in notebooks
 
 - License text (keep license details in `02-LLM/live/README.md` and `NN-topic/img/SOURCE.md`).
 - "Added" / 🧪 tags.
-- Class dates, module numbers (M14...), or the word "companion"; refer to other notebooks by file name.
+- Class dates, module numbers (M14...), or the word "companion".
+- Notebook numbers or file names in text (`03`, `05_gpt_vs_llama_vs_moe`): the site shows titles, not numbers. Refer to another notebook by its title as a link, for example `[KV Cache and GQA](./03_gqa_kv_cache.ipynb)`.
 
 ## Before committing
 

@@ -27,7 +27,9 @@ Shorter notebooks that go beyond the main series. See [Extended Materials](./liv
 - [Pretraining at Scale: Data, Training Loop, Compute](./live/06_pretraining_pipeline.ipynb)
 - [LoRA and Parameter-Efficient Fine-Tuning](./live/07_lora_peft.ipynb)
 
-Post-training series (read in order):
+## Post-training
 
-- [Preference Tuning: Reward Models, RLHF and DPO](./live/08_preference_tuning_rlhf_dpo.ipynb)
-- [Reasoning at Inference Time: Sampling, Verifiers and Evaluation](./live/09_inference_time_scaling_and_evaluation.ipynb)
+A series on what happens after instruction fine-tuning, read in order. See [Post-training](./live/00-post-training.md) for what it covers and how the notebooks connect.
+
+1. [Preference Tuning: Reward Models, RLHF and DPO](./live/08_preference_tuning_rlhf_dpo.ipynb)
+2. [Reasoning at Inference Time: Sampling, Verifiers and Evaluation](./live/09_inference_time_scaling_and_evaluation.ipynb)

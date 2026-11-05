@@ -45,7 +45,8 @@ If a well-regarded interactive site already shows the concept, link it where the
 - First cell: title; creator; content-updated date; the Colab link block used by the main notebooks; one sentence starting "Extends `xx.ipynb`..."; the sources table; runtime note; a "Part | Content" table.
 - Sources: tag sections and code taken from Raschka with 📗 (📘 for *Machine Learning with PyTorch and Scikit-Learn*) and a short source label; untagged text and code are written for the notebook. Code cells copied from a source start with `# Source: ...`.
 - Sections numbered `## 1.`, `## 2.`, ...; last section "Check yourself (interview-style)", then "References".
-- Runs on CPU in Google Colab in a few minutes, without downloading model weights.
+- Runs on CPU in Google Colab (and on an 8 GB laptop) in a few minutes. The point is learning, not training: **never train a real model**. Toy models that train in seconds are fine. To show real-model behaviour, use published checkpoints (at most ~0.6B parameters, for a few short generations), training logs and saved outputs, preferably Raschka's. When a notebook does this instead of a full fine-tuning run, say so in a short "How this notebook works" note right after the sources table.
+- A notebook that belongs to a series (several notebooks on one topic, sharing one running analogy) starts with a one-line series banner naming the parts in order, with links to the previous and next notebook.
 
 ## Do not put in notebooks
 

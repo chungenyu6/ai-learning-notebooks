@@ -16,6 +16,9 @@ project:
     - plugins/details-math.mjs
   exclude: 
     - README.md
+    - AGENTS.md
+    - CLAUDE.md
+    - docs/**
     - my-note/**
   toc:
     - file: 00-home.md

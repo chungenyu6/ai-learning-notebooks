@@ -1,6 +1,6 @@
 # LLM Extended Materials
 
-Short notebooks that extend the main LLM notebooks; the site page is [`00-extended-materials.md`](00-extended-materials.md). Each one uses Sebastian Raschka's material as its backbone, adds tests, measurements and explanations that interviews ask about, and ends with interview-style check questions (collapsible answers). All run on CPU in Google Colab (*File → Upload notebook → Runtime → Run all*) without downloading model weights.
+Short notebooks that extend the main LLM notebooks; the site page is [`00-extended-materials.md`](00-extended-materials.md). Each one uses Sebastian Raschka's material as its backbone, adds tests, measurements and explanations that interviews ask about, and ends with interview-style check questions (collapsible answers). All run on CPU in Google Colab (*File → Upload notebook → Runtime → Run all*) and train only toy models; real-model results come from published checkpoints, logs and saved outputs.
 
 They complement — not replace — the main notebooks in `../` (Raschka, *Build a Large Language Model From Scratch*).
 
@@ -14,12 +14,13 @@ They complement — not replace — the main notebooks in `../` (Raschka, *Build
 | `05_gpt_vs_llama_vs_moe` | GPT→Llama 2 §1.1–2, Llama 2→3, MoE bonus | comparison diagram, meta-device 7B count, parameter formulas, load-balancing demo |
 | `06_pretraining_pipeline` | Appendix D (warmup, cosine decay, clipping); Gutenberg and training-speed bonuses | toy data pipeline (filters, MinHash dedup, decontamination, packing), 6ND FLOPs, Chinchilla IsoFLOP curves, parallelism table |
 | `07_lora_peft` | Appendix E (LoRA) | rank experiment, merging, full FT / LoRA / QLoRA memory, SFT loss masking |
+| `08_preference_tuning_rlhf_dpo` | `ch07/04_preference-tuning-with-dpo` (DPO loss, log-probs; training log and sample outputs of his saved GPT-2 medium run in `08-preference_tuning_rlhf_dpo/data/`) | toy kitchen with a known true preference, Bradley–Terry reward model, exact RLHF optimum with a β slider, PPO clipping plot, DPO tests, collapse when trained too long, reward-hacking curve with a bias slider |
 
 ## Sources and licenses
 
 Each notebook tags sections taken from Raschka with 📗 (or 📘 for *Machine Learning with PyTorch and Scikit-Learn*); untagged text and code are written for these notebooks. License details live only here and in `SOURCE.md`, not in the notebooks. Each `<nn>-<topic>/` folder holds:
 
 - `img/` — figures copied from the author's books/repositories, with `SOURCE.md` listing every original path. Figures from *Machine Learning with PyTorch and Scikit-Learn* are MIT-licensed. Figures from *Build a Large Language Model (From Scratch)* are **not** covered by that repository's Apache-2.0 license; copyright remains with the author/publisher, and they are included for educational use with attribution.
-- `data/` — helper scripts copied unchanged from [rasbt/LLMs-from-scratch](https://github.com/rasbt/LLMs-from-scratch) (Apache-2.0, license file included) and public-domain texts.
+- `data/` — helper scripts copied unchanged from [rasbt/LLMs-from-scratch](https://github.com/rasbt/LLMs-from-scratch) (Apache-2.0, license file included), public-domain texts, and saved outputs of Raschka's own runs (for example the DPO training log in `08-preference_tuning_rlhf_dpo/data/`, extracted from the saved outputs of his Apache-2.0 notebook).
 
 Notebooks load figures via `github.com/chungenyu6/ai-learning-notebooks/blob/main/...?raw=true` and helper files from this repository first, falling back to the original repository, so they work in Colab once pushed.

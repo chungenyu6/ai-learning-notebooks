@@ -26,3 +26,7 @@ Shorter notebooks that go beyond the main series. See [Extended Materials](./liv
 - [GPT vs Llama vs MoE](./live/05_gpt_vs_llama_vs_moe.ipynb)
 - [Pretraining at Scale: Data, Training Loop, Compute](./live/06_pretraining_pipeline.ipynb)
 - [LoRA and Parameter-Efficient Fine-Tuning](./live/07_lora_peft.ipynb)
+
+Post-training series (read in order):
+
+- [Preference Tuning: Reward Models, RLHF and DPO](./live/08_preference_tuning_rlhf_dpo.ipynb)

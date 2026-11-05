@@ -7,7 +7,7 @@ The main LLM notebooks follow Sebastian Raschka's *Build a Large Language Model 
 - **What it costs.** KV-cache and GPU-memory estimates, the $O(T^2)$ attention cost, and LoRA vs full fine-tuning memory.
 - **How to check it.** Tests instead of eyeballing: the causal mask does not leak, cached decoding matches a full pass, RoPE depends only on relative position.
 
-Each notebook is short, runs on CPU in Google Colab without downloading model weights, and ends with interview-style check questions with collapsible answers. Most of them reuse Raschka's bonus material and his other books; each notebook lists its sources at the top.
+Each notebook is short, runs on CPU in Google Colab in a few minutes, trains only toy models (real-model results come from published checkpoints and logs), and ends with interview-style check questions with collapsible answers. Most of them reuse Raschka's bonus material and his other books; each notebook lists its sources at the top.
 
 ## How they map to the main notebooks
 
@@ -21,6 +21,11 @@ Each notebook is short, runs on CPU in Google Colab without downloading model we
 | [GPT vs Llama vs MoE](./05_gpt_vs_llama_vs_moe.ipynb) | [Architecture - GPT](../03_architecture_gpt.ipynb) | GPT-2 → Llama 2 → Llama 3 one component at a time, counting parameters from a config, Mixture of Experts |
 | [Pretraining at Scale: Data, Training Loop, Compute](./06_pretraining_pipeline.ipynb) | [Pretraining](../04_pretraining.ipynb) | a toy data pipeline (filters, MinHash dedup, decontamination, packing, mixture), warmup + cosine decay + gradient clipping, $6ND$ FLOPs and Chinchilla IsoFLOP curves, training-speed and parallelism tables |
 | [LoRA and PEFT](./07_lora_peft.ipynb) | [Finetuning for Classification](../05_finetuning_classification.ipynb), [Finetuning To Follow Instructions](../06_finetuning_instructions.ipynb) | LoRA layers and rank experiments, merging adapters, full FT vs LoRA vs QLoRA memory, loss masking in instruction SFT |
+| [Preference Tuning: Reward Models, RLHF and DPO](./08_preference_tuning_rlhf_dpo.ipynb) | [Finetuning To Follow Instructions](../06_finetuning_instructions.ipynb), [LoRA and PEFT](./07_lora_peft.ipynb) | Bradley–Terry reward model, the KL-regularized RLHF optimum (interactive β), PPO's clipping, DPO derived and trained on a toy kitchen, DPO collapse, reward hacking (interactive), Raschka's GPT-2 medium DPO log |
+
+## Post-training series
+
+Notebooks 08–10 form one series on what happens after instruction fine-tuning: **08** preference tuning (reward models, RLHF, DPO), **09** reasoning at inference time (sampling, verifiers, evaluation) and **10** reinforcement learning with verifiable rewards (GRPO). They share one running analogy, a restaurant kitchen training an apprentice chef, and are meant to be read in order. None of them trains a real model: toy models show each mechanism on CPU, and real-model results come from Sebastian Raschka's published checkpoints and logs. (09 and 10 are in progress.)
 
 ## Suggested order
 

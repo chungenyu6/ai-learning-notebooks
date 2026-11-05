@@ -1,0 +1,50 @@
+[
+ {
+  "split": "validation",
+  "instruction": "Convert the active sentence to passive: 'The chef cooks the meal every day.'",
+  "input": "",
+  "dataset_response": "The meal is cooked by the chef every day.",
+  "reference": "The meal is cooked everyday by the chef.",
+  "policy": "The meal was prepared by the chef."
+ },
+ {
+  "split": "validation",
+  "instruction": "Classify an input string as either a noun or a verb.",
+  "input": "Dance",
+  "dataset_response": "'Dance' can be classified as a verb.",
+  "reference": "Dance is a verb.",
+  "policy": "The input 'Dance' could be classified as a verb."
+ },
+ {
+  "split": "validation",
+  "instruction": "Rewrite the sentence using a metaphor.",
+  "input": "The book is very interesting.",
+  "dataset_response": "The book is a page-turner.",
+  "reference": "The book is a book.",
+  "policy": "The book would be of great interest."
+ },
+ {
+  "split": "test",
+  "instruction": "Rewrite the sentence using a simile.",
+  "input": "The car is very fast.",
+  "dataset_response": "The car is as fast as lightning.",
+  "reference": "The car is as fast as a bullet.",
+  "policy": "The car would be very fast."
+ },
+ {
+  "split": "test",
+  "instruction": "What type of cloud is typically associated with thunderstorms?",
+  "input": "",
+  "dataset_response": "The type of cloud typically associated with thunderstorms is cumulonimbus.",
+  "reference": "The type of cloud associated with thunderstorms is a cumulus cloud.",
+  "policy": "The type of cloud typically associated with thunderstorms is a cumulus."
+ },
+ {
+  "split": "test",
+  "instruction": "Name the author of 'Pride and Prejudice'.",
+  "input": "",
+  "dataset_response": "Jane Austen.",
+  "reference": "The author of 'Pride and Prejudice' is Jane Austen.",
+  "policy": "The author of 'Pride and Prejudice' is Jane Austen."
+ }
+]

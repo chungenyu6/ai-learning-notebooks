@@ -1,0 +1,26 @@
+# Training log printed by Raschka's dpo-from-scratch.ipynb (LLMs-from-scratch, ch07/04_preference-tuning-with-dpo).
+# GPT-2 medium (355M) after instruction fine-tuning; beta=0.1, AdamW lr=5e-6, 1 epoch, evaluated every 5 steps.
+Ep 1 (Step 000000): Train loss 0.692, Val loss 0.693, Train reward margins 0.014, Val reward margins 0.006
+Ep 1 (Step 000005): Train loss 0.691, Val loss 0.692, Train reward margins 0.040, Val reward margins 0.030
+Ep 1 (Step 000010): Train loss 0.688, Val loss 0.690, Train reward margins 0.108, Val reward margins 0.060
+Ep 1 (Step 000015): Train loss 0.682, Val loss 0.688, Train reward margins 0.228, Val reward margins 0.100
+Ep 1 (Step 000020): Train loss 0.682, Val loss 0.685, Train reward margins 0.235, Val reward margins 0.155
+Ep 1 (Step 000025): Train loss 0.674, Val loss 0.682, Train reward margins 0.396, Val reward margins 0.234
+Ep 1 (Step 000030): Train loss 0.677, Val loss 0.677, Train reward margins 0.328, Val reward margins 0.341
+Ep 1 (Step 000035): Train loss 0.668, Val loss 0.672, Train reward margins 0.529, Val reward margins 0.435
+Ep 1 (Step 000040): Train loss 0.675, Val loss 0.667, Train reward margins 0.405, Val reward margins 0.544
+Ep 1 (Step 000045): Train loss 0.651, Val loss 0.662, Train reward margins 0.904, Val reward margins 0.675
+Ep 1 (Step 000050): Train loss 0.657, Val loss 0.657, Train reward margins 0.809, Val reward margins 0.800
+Ep 1 (Step 000055): Train loss 0.645, Val loss 0.653, Train reward margins 1.064, Val reward margins 0.885
+Ep 1 (Step 000060): Train loss 0.655, Val loss 0.649, Train reward margins 0.845, Val reward margins 0.981
+Ep 1 (Step 000065): Train loss 0.629, Val loss 0.645, Train reward margins 1.452, Val reward margins 1.070
+Ep 1 (Step 000070): Train loss 0.616, Val loss 0.641, Train reward margins 1.798, Val reward margins 1.179
+Ep 1 (Step 000075): Train loss 0.612, Val loss 0.637, Train reward margins 1.886, Val reward margins 1.287
+Ep 1 (Step 000080): Train loss 0.585, Val loss 0.633, Train reward margins 2.550, Val reward margins 1.373
+Ep 1 (Step 000085): Train loss 0.605, Val loss 0.629, Train reward margins 2.059, Val reward margins 1.466
+Ep 1 (Step 000090): Train loss 0.649, Val loss 0.625, Train reward margins 1.029, Val reward margins 1.576
+Ep 1 (Step 000095): Train loss 0.593, Val loss 0.622, Train reward margins 2.331, Val reward margins 1.661
+Ep 1 (Step 000100): Train loss 0.588, Val loss 0.619, Train reward margins 2.477, Val reward margins 1.735
+Ep 1 (Step 000105): Train loss 0.574, Val loss 0.617, Train reward margins 2.938, Val reward margins 1.798
+Ep 1 (Step 000110): Train loss 0.598, Val loss 0.613, Train reward margins 2.273, Val reward margins 1.896
+Ep 1 (Step 000115): Train loss 0.606, Val loss 0.610, Train reward margins 2.008, Val reward margins 1.975

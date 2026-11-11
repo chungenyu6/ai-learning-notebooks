@@ -46,4 +46,3 @@ site:
   options:
     favicon: web_img/site_icon.ico
     logo: web_img/site_logo3.png
-    style: styles/callouts.css

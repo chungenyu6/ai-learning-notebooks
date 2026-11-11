@@ -41,6 +41,10 @@ jobs:
         run: npm ci
       - name: Build HTML Assets
         run: myst build --html
+      - name: Add callout colors to the theme stylesheet
+        # The static build does not link site.options.style, so append it to
+        # myst-theme.css, which every page loads.
+        run: cat styles/callouts.css >> _build/html/myst-theme.css
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

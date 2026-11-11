@@ -1,3 +1,7 @@
+---
+date: 2026-11-11
+---
+
 # Overview
 
 These are my notes for preparing ML/AI interviews in 2025 to 2026.

@@ -1,6 +1,7 @@
 ---
 site:
   hide_outline: true
+date: 2026-11-05
 ---
 
 # AI Learning Notes

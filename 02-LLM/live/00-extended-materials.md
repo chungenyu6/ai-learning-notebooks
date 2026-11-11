@@ -1,3 +1,7 @@
+---
+date: 2026-11-11
+---
+
 # Extended Materials
 
 The main LLM notebooks follow Sebastian Raschka's *Build a Large Language Model (From Scratch)* chapter by chapter and build one model, GPT-2, end to end. Interviews ask about more than that one model, so these notebooks fill the gaps:

@@ -63,15 +63,16 @@ If a well-regarded interactive site already shows the concept, link it where the
 ## Before committing
 
 1. **Execute the notebook** top to bottom and save outputs. CI does not run notebooks; the site shows the saved outputs.
-2. If you add, rename or reorder a notebook, update `02-LLM/live/00-extended-materials.md`, `02-LLM/00-toc-llm.md`, `02-LLM/live/README.md`, and links in other notebooks.
-3. Build the site and check for warnings:
+2. **Update the date on every page you changed**, with any edit, even a single link or callout: the `Content updated: YYYY-MM-DD` line near the top of a notebook, and the `date:` field in the front matter of a Markdown page (overview pages, `00-home.md`, `00-toc-*.md`). Use the date of the change.
+3. If you add, rename or reorder a notebook, update `02-LLM/live/00-extended-materials.md`, `02-LLM/00-toc-llm.md`, `02-LLM/live/README.md`, and links in other notebooks.
+4. Build the site and check for warnings:
 
    ```bash
    npm ci
    npx mystmd build --html
    ```
 
-4. Pushing to `main` deploys the site through GitHub Actions.
+5. Pushing to `main` deploys the site through GitHub Actions.
 
 ## Language
 

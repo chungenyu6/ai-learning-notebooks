@@ -1,3 +1,7 @@
+---
+date: 2026-11-05
+---
+
 # Post-training
 
 The main LLM notebooks end with instruction fine-tuning: the model can follow instructions by copying demonstrations. Modern assistants and reasoning models go further. This series covers the three ideas behind that step, the topics behind interview questions such as "walk me through SFT → RLHF → DPO → GRPO" and "how do reasoning models get better at math?":

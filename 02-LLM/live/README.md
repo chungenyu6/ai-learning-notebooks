@@ -7,7 +7,7 @@ They complement — not replace — the main notebooks in `../` (Raschka, *Build
 | Notebook | Backbone (Raschka) | Added |
 |---|---|---|
 | `00_rnn_lstm_to_transformer` | *ML with PyTorch & Scikit-Learn* Ch15 (RNN, LSTM, char-level LM); *LLMs-from-scratch* Ch3 §3.1–3.2 | stacked RNNs, tanh vs sigmoid vs ReLU plot, gradient-decay plot, LSTM and GRU cell checks, RNN/LSTM/GRU/Transformer tables, recall experiment, section quizzes |
-| `01_tokenization_clm_mlm` | BPE-from-scratch and embedding-vs-matmul bonuses; Ch2 figures | GPT-2 vs cl100k quirks, simple-BPE CJK limitation, CLM vs MLM |
+| `01_tokenization_clm_mlm` | BPE-from-scratch and embedding-vs-matmul bonuses; Ch2 figures | GPT-2 vs cl100k quirks, simple-BPE CJK limitation, CLM vs MLM, embedding models demo with all-MiniLM-L6-v2 (Apache-2.0, downloaded at run time) |
 | `02_self_and_cross_attention` | Ch3 §3.4–3.6; efficient-MHA and buffers bonuses | worked example, √d_k measurement, causal leakage test, block-component table, MHA vs `nn.MultiheadAttention`, cross-attention, O(T²) |
 | `03_gqa_kv_cache` | KV-cache and GQA bonuses (scripts in `03-gqa_kv_cache/data/`) | cached == uncached tests for MHA/GQA/MQA, GiB calculator, 8B capacity question |
 | `04_positional_encoding_rope` | GPT→Llama 2 §1.4–1.5, Llama 2→3 §1.2 | relative-position test, layout equivalence, KV-cache offset bug, Llama 3.1 frequency scaling plot |

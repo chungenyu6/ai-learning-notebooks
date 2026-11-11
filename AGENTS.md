@@ -21,6 +21,11 @@ The reader learns best from **pictures, tables, worked examples and plain-langua
 4. **Worked examples by hand** with small numbers before the general formula.
 5. **Tests instead of eyeballing.** `assert` that an implementation matches a reference or a property holds (no future leakage, cached == uncached, and so on).
 6. **Quick checks and interview questions** in collapsible `<details>` blocks. Inline `$...$` math works inside them on the site (rendered by `plugins/details-math.mjs`). Put one 30-second, no-math explanation question in "Check yourself".
+7. **Callouts for the few things to remember**, written as GitHub-style alerts so they render as colored boxes on the site and as plain quotes in Colab. About one per section plus a "Key takeaways" box before "Check yourself"; move an existing key sentence into the box rather than repeating it.
+   - `> [!IMPORTANT]` (yellow): key equations, facts and rules. `> [!TIP]` (green): the core intuition. `> [!WARNING]` (red): a common mistake.
+   - The box title is fixed, so start the body with a bold label: `> **Key equation: ...**`, `> **Common mistake: ...**`.
+   - Write display math inside a callout on **one line** (`> $$...$$`); in multi-line `$$` blocks MyST keeps the `>` markers in the formula.
+   - Colors come from `styles/callouts.css`.
 
 ## Interactive elements (only where they teach)
 

@@ -1,0 +1,35 @@
+/* Callout colors. The theme gives callouts the same grey header as code
+   blocks; tint them so key points stand out. Important = yellow,
+   Warning = red, Tip = green. */
+
+aside.myst-admonition-important,
+aside.myst-admonition-warning,
+aside.myst-admonition-tip {
+  border-left-width: 4px !important;
+}
+
+/* Important: yellow */
+aside.myst-admonition-important { border-left-color: #eab308 !important; background-color: #fefce8 !important; }
+aside.myst-admonition-important .myst-admonition-header { background-color: #fef08a !important; }
+aside.myst-admonition-important .myst-admonition-header-icon { color: #a16207 !important; fill: #a16207 !important; }
+
+/* Warning: red */
+aside.myst-admonition-warning { border-left-color: #dc2626 !important; background-color: #fef2f2 !important; }
+aside.myst-admonition-warning .myst-admonition-header { background-color: #fecaca !important; }
+aside.myst-admonition-warning .myst-admonition-header-icon { color: #b91c1c !important; fill: #b91c1c !important; }
+
+/* Tip: green */
+aside.myst-admonition-tip { background-color: #f0fdf4 !important; }
+aside.myst-admonition-tip .myst-admonition-header { background-color: #bbf7d0 !important; }
+
+/* Dark mode: same hues, low-alpha tints */
+html.dark aside.myst-admonition-important { background-color: rgba(234, 179, 8, 0.08) !important; }
+html.dark aside.myst-admonition-important .myst-admonition-header { background-color: rgba(234, 179, 8, 0.25) !important; }
+html.dark aside.myst-admonition-important .myst-admonition-header-icon { color: #facc15 !important; fill: #facc15 !important; }
+
+html.dark aside.myst-admonition-warning { background-color: rgba(220, 38, 38, 0.08) !important; }
+html.dark aside.myst-admonition-warning .myst-admonition-header { background-color: rgba(220, 38, 38, 0.3) !important; }
+html.dark aside.myst-admonition-warning .myst-admonition-header-icon { color: #f87171 !important; fill: #f87171 !important; }
+
+html.dark aside.myst-admonition-tip { background-color: rgba(22, 163, 74, 0.08) !important; }
+html.dark aside.myst-admonition-tip .myst-admonition-header { background-color: rgba(22, 163, 74, 0.25) !important; }

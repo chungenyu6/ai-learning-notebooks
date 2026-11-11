@@ -22,12 +22,40 @@ Each notebook is short, runs on CPU in Google Colab in a few minutes, trains onl
 | [Pretraining at Scale: Data, Training Loop, Compute](./06_pretraining_pipeline.ipynb) | [Pretraining](../04_pretraining.ipynb) | a toy data pipeline (filters, MinHash dedup, decontamination, packing, mixture), warmup + cosine decay + gradient clipping, $6ND$ FLOPs and Chinchilla IsoFLOP curves, training-speed and parallelism tables |
 | [LoRA and PEFT](./07_lora_peft.ipynb) | [Finetuning for Classification](../05_finetuning_classification.ipynb), [Finetuning To Follow Instructions](../06_finetuning_instructions.ipynb) | LoRA layers and rank experiments, merging adapters, full FT vs LoRA vs QLoRA memory, loss masking in instruction SFT |
 
-## Suggested order
+## Suggested reading order
 
-Read each extended notebook after the main notebook it builds on (the table above). A few also build on each other:
+### Do I need the main notebooks first?
+
+Every extended notebook **runs on its own**: it carries or downloads all the code it needs, so you can open any of them in Colab and run it top to bottom. What differs is how much each one assumes you already know:
+
+| You can start here directly | Know a GPT block first ([Architecture - GPT](../03_architecture_gpt.ipynb)) | Know the training loop first ([Pretraining](../04_pretraining.ipynb), fine-tuning) |
+|---|---|---|
+| [From RNN to LSTM to Transformer](./00_rnn_lstm_to_transformer.ipynb) | [KV Cache and GQA](./03_gqa_kv_cache.ipynb) | [Pretraining at Scale](./06_pretraining_pipeline.ipynb) |
+| [Tokenization and Embeddings](./01_tokenization_clm_mlm.ipynb) | [Positional Encoding: Sinusoidal to RoPE](./04_positional_encoding_rope.ipynb) | [LoRA and PEFT](./07_lora_peft.ipynb) |
+| [Self-, Multi-Head and Cross-Attention](./02_self_and_cross_attention.ipynb) (a condensed version of the main [Attention](../02_attention.ipynb) notebook) | [GPT vs Llama vs MoE](./05_gpt_vs_llama_vs_moe.ipynb) | |
+
+How to choose:
+
+- **The topic is new to you:** read the main notebook first. It builds the model step by step; the extended notebook assumes you have seen that build and focuses on follow-up questions, tests and trade-offs.
+- **You know the topic and are preparing for interviews:** go straight to the extended notebook.
+- **Not sure:** try its "Check yourself" questions first. If you cannot answer half of them, read the main notebook.
+
+A few extended notebooks also build on each other:
 
 - [KV Cache and GQA](./03_gqa_kv_cache.ipynb) assumes [Self-, Multi-Head and Cross-Attention](./02_self_and_cross_attention.ipynb).
 - [Positional Encoding: Sinusoidal to RoPE](./04_positional_encoding_rope.ipynb) assumes both of those.
 - [GPT vs Llama vs MoE](./05_gpt_vs_llama_vs_moe.ipynb) reuses the RoPE code from [Positional Encoding: Sinusoidal to RoPE](./04_positional_encoding_rope.ipynb).
+
+### One path through everything
+
+Main notebooks in **bold**, extended notebooks in plain text:
+
+1. **[Tokenization](../01_tokenization.ipynb)** → [Tokenization and Embeddings](./01_tokenization_clm_mlm.ipynb)
+2. [From RNN to LSTM to Transformer](./00_rnn_lstm_to_transformer.ipynb), for why attention was needed
+3. **[Attention](../02_attention.ipynb)** → [Self-, Multi-Head and Cross-Attention](./02_self_and_cross_attention.ipynb)
+4. **[Architecture - GPT](../03_architecture_gpt.ipynb)** → [KV Cache and GQA](./03_gqa_kv_cache.ipynb) → [Positional Encoding: Sinusoidal to RoPE](./04_positional_encoding_rope.ipynb) → [GPT vs Llama vs MoE](./05_gpt_vs_llama_vs_moe.ipynb)
+5. **[Pretraining](../04_pretraining.ipynb)** → [Pretraining at Scale](./06_pretraining_pipeline.ipynb)
+6. **[Finetuning for Classification](../05_finetuning_classification.ipynb)** → **[Finetuning To Follow Instructions](../06_finetuning_instructions.ipynb)** → [LoRA and PEFT](./07_lora_peft.ipynb)
+7. The [Post-training](./00-post-training.md) series, in its own order
 
 What happens after fine-tuning (preference tuning, inference-time scaling, reinforcement learning with verifiable rewards) has its own series: [Post-training](./00-post-training.md).

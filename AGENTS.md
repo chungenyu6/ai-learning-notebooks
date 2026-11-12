@@ -25,6 +25,7 @@ The reader learns best from **pictures, tables, worked examples and plain-langua
    - `> [!IMPORTANT]` (yellow): key equations, facts and rules. `> [!TIP]` (green): the core intuition. `> [!WARNING]` (red): a common mistake.
    - The box title is fixed, so start the body with a bold label: `> **Key equation: ...**`, `> **Common mistake: ...**`.
    - Write display math inside a callout on **one line** (`> $$...$$`); in multi-line `$$` blocks MyST keeps the `>` markers in the formula.
+   - Whenever you add or change content, re-read the notebook's callouts and its "Key takeaways" box, and update, add or remove callouts so they still match the content. New key ideas belong in the takeaways too.
    - Colors come from `styles/callouts.css`, which the deploy workflow appends to the theme stylesheet (`myst-theme.css`). For a local preview, append it yourself after building: `cat styles/callouts.css >> _build/html/myst-theme.css`.
 
 ## Interactive elements (only where they teach)

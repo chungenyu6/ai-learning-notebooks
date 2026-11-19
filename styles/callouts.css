@@ -34,19 +34,68 @@ html.dark aside.myst-admonition-warning .myst-admonition-header-icon { color: #f
 html.dark aside.myst-admonition-tip { background-color: rgba(22, 163, 74, 0.08) !important; }
 html.dark aside.myst-admonition-tip .myst-admonition-header { background-color: rgba(22, 163, 74, 0.25) !important; }
 
-/* Let the architecture figure expand in place, including on narrow screens. */
+/* Keep the notebook's native disclosure while presenting it as a lightbox on the site. */
 details:has(.architecture-zoom-image) > summary {
   cursor: zoom-in;
 }
 
-details[open]:has(.architecture-zoom-image) > summary {
+html:has(details[open] .architecture-zoom-image) {
+  overflow: hidden;
+  scrollbar-gutter: stable;
+}
+
+/* The backdrop belongs to the summary, so clicking it closes the disclosure. */
+details[open]:has(.architecture-zoom-image) > summary::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9990;
+  background: rgb(0 0 0 / 85%);
   cursor: zoom-out;
 }
 
+details[open]:has(.architecture-zoom-image) > summary::after {
+  content: "×";
+  position: fixed;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 9992;
+  width: 2.75rem;
+  height: 2.75rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgb(32 32 32);
+  color: white;
+  font-size: 1.75rem;
+  cursor: pointer;
+}
+
+details[open]:has(.architecture-zoom-image) > summary:focus-visible::after {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
 .architecture-zoom-image {
-  overflow-x: auto;
+  position: fixed;
+  inset: 0;
+  z-index: 9991;
+  display: grid;
+  place-items: center;
+  padding: 3.75rem 1rem 1rem;
+  pointer-events: none;
 }
 
 .architecture-zoom-image img {
-  max-width: none;
+  width: auto !important;
+  max-width: 100%;
+  max-height: calc(100dvh - 4.75rem);
+  object-fit: contain;
+  pointer-events: auto;
+}
+
+@media (max-width: 600px) {
+  .architecture-zoom-image {
+    padding-inline: 0;
+  }
 }

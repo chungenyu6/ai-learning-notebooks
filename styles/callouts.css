@@ -33,3 +33,20 @@ html.dark aside.myst-admonition-warning .myst-admonition-header-icon { color: #f
 
 html.dark aside.myst-admonition-tip { background-color: rgba(22, 163, 74, 0.08) !important; }
 html.dark aside.myst-admonition-tip .myst-admonition-header { background-color: rgba(22, 163, 74, 0.25) !important; }
+
+/* Let the architecture figure expand in place, including on narrow screens. */
+details:has(.architecture-zoom-image) > summary {
+  cursor: zoom-in;
+}
+
+details[open]:has(.architecture-zoom-image) > summary {
+  cursor: zoom-out;
+}
+
+.architecture-zoom-image {
+  overflow-x: auto;
+}
+
+.architecture-zoom-image img {
+  max-width: none;
+}

@@ -75,6 +75,42 @@ If a well-regarded interactive site already shows the concept, link it where the
 
 5. Pushing to `main` deploys the site through GitHub Actions.
 
+## Working with the maintainer
+
+### How material arrives, and how to add it
+
+- Requests often come as **pasted text or a ChatGPT share link**, with a note such as "add Parts 1, 2, 5 and 7". Read all of it, compare it with the notebook, and **add only what is missing**. Skip what is already covered and say so; a short "Part | already in the notebook? | what I added" table works well.
+- **Supplements stay short**: a few cells that fill a gap, not a rewrite. Rewrite the material in English in the notebook's own voice; reuse the notebook's running example and numbers where they connect, instead of introducing new ones.
+- **Check every number and claim** before it goes in: recompute it, or verify it against the primary source. Leave out what cannot be verified and say so. Redraw figures from such sources in matplotlib (rule 3 above).
+- Put new material where the concept is introduced. In main notebooks, keep Raschka's flow and insert supplements next to the relevant section.
+- **Propose before building anything large** (a new notebook or series, interactive elements across several notebooks, a restructure): give a short recommendation and let the maintainer choose. Small, clearly requested edits: just do them.
+- ChatGPT share links are rendered with JavaScript: open them in a browser and wait for the answers to load (the answer text is also in the page's embedded data). A share link is a snapshot; newer messages appear only after the maintainer updates the link.
+
+### Running analogies already in use
+
+Keep these when you add to a notebook; do not introduce a second analogy for the same idea.
+
+| Notebook | Analogy |
+|---|---|
+| Tokenization and Embeddings | a dictionary: entry numbers (ids), cards (embeddings), a librarian's summary (embedding models) |
+| Self-, Multi-Head and Cross-Attention; the block section of Architecture - GPT | a meeting room: questions, name tags, what people say; committees (heads); another room (cross-attention) |
+| KV Cache and GQA | a factory waiting for trucks (compute vs memory bandwidth) |
+| Post-training series | a restaurant kitchen training an apprentice chef |
+
+### After changing a notebook
+
+- **Commit, push and check the live page** after each finished change; the maintainer reads the site. GitHub Pages lets browsers cache pages for up to 10 minutes.
+- **Offer to sync the change to the OLIVER vault** (`~/Documents/obsidian-vaults/active/my-council/OLIVER`, the maintainer's Obsidian knowledge base, its own git repository). Sync only when the maintainer agrees. When syncing:
+  - follow the vault's `_meta/rules.md`: body in Traditional Chinese with technical terms in English, tables, Mermaid for flows, a Feynman explanation with its limits, Obsidian callouts (`> [!important]`, `> [!tip]`, `> [!warning]`);
+  - add to the existing page that fits (for example `concepts/transformer-architecture.md`, `references/llm-inference-memory-budget.md`, `references/online-learning-resources-triage.md`), and link to related pages instead of repeating them;
+  - update the page's `updated:` date, add an entry at the top of `log.md`, then commit and push the vault.
+
+### Technical pitfalls
+
+- **Keep each notebook's JSON formatting** when editing it programmatically: main notebooks use 2-space indentation, Extended Materials 1-space, both with `ensure_ascii=False` and a trailing newline. Otherwise the whole file shows up as changed.
+- In Plotly subplots, avoid `scaleanchor`: on the site the figure collapses to about 20 px wide.
+- Images in a newly added or renamed `img/` folder are fetched from raw GitHub during the build; if that build ran before GitHub served them, rerun the deploy.
+
 ## Language
 
-Notebook content is in English. Conversation with the maintainer is usually in Traditional Chinese.
+Notebook content is in English. Talk to the maintainer in Traditional Chinese. OLIVER vault pages are written in Traditional Chinese (technical terms stay in English).
